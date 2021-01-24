@@ -26,6 +26,7 @@ import Reddit from './reddit'
 import Salesforce from './salesforce'
 import Slack from './slack'
 import Spotify from './spotify'
+import Steam from './steam'
 import Strava from './strava'
 import Twitch from './twitch'
 import Twitter from './twitter'
@@ -61,6 +62,7 @@ export default {
   Salesforce,
   Slack,
   Spotify,
+  Steam,
   Strava,
   Twitch,
   Twitter,
