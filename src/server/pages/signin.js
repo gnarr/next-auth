@@ -4,7 +4,7 @@ import render from 'preact-render-to-string'
 export default function signin ({ csrfToken, providers, callbackUrl, email, error: errorType }) {
   // We only want to render providers
   const providersToRender = providers.filter(provider => {
-    if (provider.type === 'oauth' || provider.type === 'email') {
+    if (provider.type === 'oauth' || provider.type === 'openid' || provider.type === 'email') {
       // Always render oauth and email type providers
       return true
     } else if (provider.type === 'credentials' && provider.credentials) {
@@ -38,7 +38,7 @@ export default function signin ({ csrfToken, providers, callbackUrl, email, erro
         </div>}
       {providersToRender.map((provider, i) =>
         <div key={provider.id} className='provider'>
-          {provider.type === 'oauth' &&
+          {(provider.type === 'oauth' || provider.type === 'openid') &&
             <form action={provider.signinUrl} method='POST'>
               <input type='hidden' name='csrfToken' value={csrfToken} />
               {callbackUrl && <input type='hidden' name='callbackUrl' value={callbackUrl} />}
