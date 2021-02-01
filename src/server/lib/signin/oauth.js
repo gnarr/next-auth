@@ -1,6 +1,7 @@
 import oAuthClient from '../oauth/client'
 import logger from '../../../lib/logger'
 
+/** @param {import("../..").NextAuthRequest} req */
 export default async function getAuthorizationUrl (req) {
   const { provider } = req.options
 
@@ -33,7 +34,7 @@ export default async function getAuthorizationUrl (req) {
   }
 
   try {
-    const oAuthToken = await client.getOAuthRequestToken(provider.callbackUrl)
+    const oAuthToken = await client.getOAuthRequestToken()
     const url = `${provider.authorizationUrl}?oauth_token=${oAuthToken}`
     logger.debug('GET_AUTHORIZATION_URL', url)
     return url
