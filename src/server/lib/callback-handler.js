@@ -17,7 +17,7 @@ export default async function callbackHandler (sessionToken, profile, providerAc
   // Input validation
   if (!profile) throw new Error('Missing profile')
   if (!providerAccount?.id || !providerAccount.type) throw new Error('Missing or invalid provider account')
-  if (!['email', 'oauth'].includes(providerAccount.type)) throw new Error('Provider not supported')
+  if (!['email', 'oauth', 'openid'].includes(providerAccount.type)) throw new Error('Provider not supported')
 
   const {
     adapter,
@@ -109,7 +109,7 @@ export default async function callbackHandler (sessionToken, profile, providerAc
       user,
       isNewUser
     }
-  } else if (providerAccount.type === 'oauth') {
+  } else if (providerAccount.type === 'oauth' || providerAccount.type === 'openid') {
     // If signing in with oauth account, check to see if the account exists already
     const userByProviderAccountId = await getUserByProviderAccountId(providerAccount.provider, providerAccount.id)
     if (userByProviderAccountId) {
